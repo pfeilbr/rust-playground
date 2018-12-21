@@ -31,13 +31,12 @@ fn generate_random_number() {
     let high = 9;
     let ranged_num = rand::thread_rng().gen_range(low, high);
     println!("ranged random number ({}-{}): {}", low, high, ranged_num);
-
 }
 
 fn main() {
     // hello();
     // for_loop();
-    // user_input(); 
+    // user_input();
     // generate_random_number();
-    
+
 }

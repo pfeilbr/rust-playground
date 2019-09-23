@@ -6,6 +6,7 @@ fn hello() {
     println!("Hello {}!", name);
 }
 
+
 fn for_loop() {
     for i in 0..9 {
         println!("i: {}", i);
@@ -38,5 +39,4 @@ fn main() {
     // for_loop();
     // user_input();
     // generate_random_number();
-
 }

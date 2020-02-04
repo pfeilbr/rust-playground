@@ -2,6 +2,10 @@
 
 learn [Rust](https://www.rust-lang.org/) programming language
 
+## Prerequisites
+
+* [nodemon](https://nodemon.io/) - enables live coding.  compile and run on file change
+
 ## Development
 
 ```sh

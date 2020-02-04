@@ -1,6 +1,6 @@
 # rust-playground
 
-learn [Rust](https://www.rust-lang.org/) progamming language
+learn [Rust](https://www.rust-lang.org/) programming language
 
 ## Development
 

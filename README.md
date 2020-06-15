@@ -17,3 +17,4 @@ nodemon --exec "RUSTFLAGS=\"$RUSTFLAGS -A dead_code\" cargo run" src/main.rs
 ## Resources
 
 * [The Rust Programming Language book](https://doc.rust-lang.org/stable/book/)
+* [Rust by Example](https://doc.rust-lang.org/rust-by-example/)

@@ -33,9 +33,24 @@ fn generate_random_number() {
     println!("ranged random number ({}-{}): {}", low, high, ranged_num);
 }
 
+#[derive(Debug)]
+struct Person<'a> {
+    name: &'a str,
+    age: u8,
+}
+
+fn struct_example() {
+    let p = Person {
+        name: "brian",
+        age: 42,
+    };
+    println!("{:?}", p);
+}
+
 fn main() {
-    hello();
+    // hello();
     // for_loop();
     // user_input();
     // generate_random_number();
+    struct_example();
 }

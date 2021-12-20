@@ -5,9 +5,6 @@
 use rand::Rng;
 use std::io;
 
-use futures::prelude::*;
-use tokio::prelude::*;
-
 fn hello() {
     let name = "brian";
     println!("Hello {}!", name);
@@ -66,7 +63,7 @@ fn struct_example() {
 // }
 
 #[test]
-fn test_eample() {
+fn test_example() {
 
     assert!(true);
     assert_eq!(1,1)
@@ -88,7 +85,7 @@ fn test_format() {
 }
 
 #[test]
-#[should_panic(expected = "boom")]
+#[should_panic]
 fn test_todo() {
     todo!("boom")
 }
@@ -99,10 +96,28 @@ fn ignored_test() {
     assert_eq!(0, 0);
 }
 
+#[test]
+fn test_child_process() {
+    use std::process::Command;
+    let output = Command::new("echo")
+        .arg("-n")
+        .arg("foo")
+        .output().unwrap_or_else(|e| {
+            panic!("failed to execute process: {}", e)
+    });
+
+    if output.status.success() {
+        let s = String::from_utf8_lossy(&output.stdout);
+        assert_eq!(s, "foo");
+    } else {
+        let s = String::from_utf8_lossy(&output.stderr);
+        panic!("echo failed and stderr was:\n{}", s);
+    }
+
+    
+}
+
 fn main() {
-    use futures::Future;
-    //async_example_start();
-    // todo!();
     // hello();
     // for_loop();
     // user_input();

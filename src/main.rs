@@ -81,6 +81,24 @@ fn test_checked() {
     assert_eq!(a.checked_add(3), Some(5))
 }
 
+#[test]
+fn test_format() {
+    let name = "world";
+    assert_eq!(format!("hello {}", name), "hello world")
+}
+
+#[test]
+#[should_panic(expected = "boom")]
+fn test_todo() {
+    todo!("boom")
+}
+
+#[test]
+#[ignore]
+fn ignored_test() {
+    assert_eq!(0, 0);
+}
+
 fn main() {
     use futures::Future;
     //async_example_start();

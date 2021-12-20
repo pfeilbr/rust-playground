@@ -1,5 +1,12 @@
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(warnings, unused)]
+
 use rand::Rng;
 use std::io;
+
+use futures::prelude::*;
+use tokio::prelude::*;
 
 fn hello() {
     let name = "brian";
@@ -47,10 +54,41 @@ fn struct_example() {
     println!("{:?}", p);
 }
 
+// async fn app() -> Result<()> {
+//     //todo!()
+//     future::ok("Hello world".to_string()).await
+// }
+
+// fn async_example_start() {
+//     let mut rt = tokio::runtime::Runtime::new().unwrap();
+//     let future = app();
+//     rt.block_on(future);
+// }
+
+#[test]
+fn test_eample() {
+
+    assert!(true);
+    assert_eq!(1,1)
+}
+
+#[test]
+fn test_checked() {
+    let i: i32 = 3;
+    let product = i.checked_mul(2).unwrap();
+    assert_eq!(product, 6);
+    let a: i32 = 2;
+    assert_eq!(a.checked_add(3), Some(5))
+}
+
 fn main() {
+    use futures::Future;
+    //async_example_start();
+    // todo!();
     // hello();
     // for_loop();
     // user_input();
     // generate_random_number();
     struct_example();
+    
 }

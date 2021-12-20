@@ -56,17 +56,6 @@ fn struct_example() {
     println!("{:?}", p);
 }
 
-// async fn app() -> Result<()> {
-//     //todo!()
-//     future::ok("Hello world".to_string()).await
-// }
-
-// fn async_example_start() {
-//     let mut rt = tokio::runtime::Runtime::new().unwrap();
-//     let future = app();
-//     rt.block_on(future);
-// }
-
 #[test]
 fn test_example() {
 

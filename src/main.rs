@@ -4,16 +4,21 @@
 
 use rand::Rng;
 use std::io;
+use std::char;
+use std::str::FromStr;
 
 fn hello() {
     let name = "brian";
     println!("Hello {}!", name);
 }
 
+#[test]
 fn for_loop() {
-    for i in 0..9 {
-        println!("i: {}", i);
+    let mut s = String::new();
+    for i in 0..3 {
+        s.push_str(i.to_string().as_str())
     }
+    assert_eq!("012", s.as_str())
 }
 
 fn user_input() {

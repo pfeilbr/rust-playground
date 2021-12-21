@@ -28,6 +28,7 @@ RUST_BACKTRACE=1 cargo run
 
 ## Notes
 
+* guarantees memory safety
 * traits are like interfaces in other languages
 * includes macros for metaprogramming
 

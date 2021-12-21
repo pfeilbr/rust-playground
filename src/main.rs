@@ -9,6 +9,7 @@ use std::process::Command;
 
 #[test]
 fn test_hello_format() {
+    print!("hello");
     let name = "brian";
     assert_eq!(format!("Hello {}!", name), "Hello brian!");
 }

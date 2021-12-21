@@ -16,6 +16,9 @@ nodemon --exec "RUSTFLAGS=\"$RUSTFLAGS -A dead_code\" cargo run" src/main.rs
 # watch tests (run `cargo test` when any file changes)
 cargo watch -x check -x test
 
+# show output (e.g. `println!`)
+cargo watch -x 'test -- --show-output'
+
 # to get a stack backtrace on panic
 RUST_BACKTRACE=1 cargo run
 
@@ -26,6 +29,7 @@ RUST_BACKTRACE=1 cargo run
 ## Notes
 
 * traits are like interfaces in other languages
+* includes macros for metaprogramming
 
 ---
 

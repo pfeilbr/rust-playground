@@ -6,6 +6,7 @@ use rand::Rng;
 use std::io;
 use std::char;
 use std::str::FromStr;
+use std::process::Command;
 
 fn hello() {
     let name = "brian";
@@ -42,19 +43,29 @@ fn generate_random_number() {
     println!("ranged random number ({}-{}): {}", low, high, ranged_num);
 }
 
+
 #[derive(Debug)]
 struct Person<'a> {
     name: &'a str,
     age: u8,
 }
 
+#[test]
 fn struct_example() {
     let p = Person {
         name: "brian",
         age: 42,
     };
-    println!("{:?}", p);
+    assert_eq!(format!("{:?}", p), "Person { name: \"brian\", age: 42 }")
 }
+
+#[test]
+fn test_strings() {
+    let s = String::from_str("foo").unwrap();
+    let ss = &s;
+    assert_eq!(ss, "foo")
+}
+
 
 #[test]
 fn test_example() {
@@ -92,7 +103,6 @@ fn ignored_test() {
 
 #[test]
 fn test_child_process() {
-    use std::process::Command;
     let output = Command::new("echo")
         .arg("-n")
         .arg("foo")

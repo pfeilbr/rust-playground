@@ -8,7 +8,7 @@ use std::str::FromStr;
 use std::process::Command;
 
 #[test]
-fn hello() {
+fn test_hello_format() {
     let name = "brian";
     assert_eq!(format!("Hello {}!", name), "Hello brian!");
 }
@@ -33,14 +33,16 @@ fn user_input() {
     }
 }
 
-#[derive(Debug)]
-struct Person<'a> {
-    name: &'a str,
-    age: u8,
-}
 
 #[test]
-fn struct_example() {
+fn test_struct() {
+
+    #[derive(Debug)]
+    struct Person<'a> {
+        name: &'a str,
+        age: u8,
+    }    
+
     let p = Person {
         name: "brian",
         age: 42,
@@ -116,13 +118,46 @@ fn test_variables() {
     var2 = &y;
 }
 
+#[test]
+fn test_tuples() {
+    let rect1 = (30, 50);
+    assert_eq!(30, rect1.0);
+    assert_eq!(50, rect1.1)
+}
+
+#[test]
+fn test_traits() {
+    struct Player {
+        first_name: String,
+        last_name: String,
+    }
+
+    impl Player {
+        fn new(first_name: String, last_name: String) -> Player {
+            Player {
+                first_name : first_name,
+                last_name : last_name,
+            }
+        }
+    }    
+    
+    trait FullName {
+        fn full_name(&self) -> String;
+    }
+    
+    impl FullName for Player {
+        fn full_name(&self) -> String {
+            format!("{} {}", self.first_name, self.last_name)
+        }
+    }
+
+    let player_2 = Player::new("Roger".to_string(),"Federer".to_string());
+
+    assert_eq!(format!("Player 02: {}", player_2.full_name()), "Player 02: Roger Federer")
+        
+}
 
 
 fn main() {
-    // hello();
-    // for_loop();
-    // user_input();
-    // generate_random_number();
-    //struct_example();
     
 }

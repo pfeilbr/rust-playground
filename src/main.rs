@@ -2,12 +2,12 @@
 #![allow(unused_variables)]
 #![allow(warnings, unused)]
 
-use std::env;
-use std::io;
 use std::char;
-use std::str::FromStr;
-use std::process::Command;
+use std::env;
 use std::fs;
+use std::io;
+use std::process::Command;
+use std::str::FromStr;
 
 #[test]
 fn test_hello_format() {
@@ -28,8 +28,7 @@ fn for_loop() {
 #[test]
 fn test_read_file() {
     let filename = "./README.md";
-    let contents = fs::read_to_string(filename)
-    .expect("Something went wrong reading the file");
+    let contents = fs::read_to_string(filename).expect("Something went wrong reading the file");
     assert!(contents.contains("rust-playground"));
 }
 
@@ -55,15 +54,13 @@ fn user_input() {
     }
 }
 
-
 #[test]
 fn test_struct() {
-
     #[derive(Debug)]
     struct Person<'a> {
         name: &'a str,
         age: u8,
-    }    
+    }
 
     let p = Person {
         name: "brian",
@@ -79,12 +76,10 @@ fn test_strings() {
     assert_eq!(ss, "foo")
 }
 
-
 #[test]
 fn test_example() {
-
     assert!(true);
-    assert_eq!(1,1)
+    assert_eq!(1, 1)
 }
 
 #[test]
@@ -118,9 +113,8 @@ fn test_child_process() {
     let output = Command::new("echo")
         .arg("-n")
         .arg("foo")
-        .output().unwrap_or_else(|e| {
-            panic!("failed to execute process: {}", e)
-    });
+        .output()
+        .unwrap_or_else(|e| panic!("failed to execute process: {}", e));
 
     if output.status.success() {
         let s = String::from_utf8_lossy(&output.stdout);
@@ -157,26 +151,28 @@ fn test_traits() {
     impl Player {
         fn new(first_name: String, last_name: String) -> Player {
             Player {
-                first_name : first_name,
-                last_name : last_name,
+                first_name: first_name,
+                last_name: last_name,
             }
         }
-    }    
-    
+    }
+
     trait FullName {
         fn full_name(&self) -> String;
     }
-    
+
     impl FullName for Player {
         fn full_name(&self) -> String {
             format!("{} {}", self.first_name, self.last_name)
         }
     }
 
-    let player_2 = Player::new("Roger".to_string(),"Federer".to_string());
+    let player_2 = Player::new("Roger".to_string(), "Federer".to_string());
 
-    assert_eq!(format!("Player 02: {}", player_2.full_name()), "Player 02: Roger Federer")
-        
+    assert_eq!(
+        format!("Player 02: {}", player_2.full_name()),
+        "Player 02: Roger Federer"
+    )
 }
 
 #[test]
@@ -185,6 +181,4 @@ fn test_command_line_args() {
     println!("{:?}", args);
 }
 
-fn main() {
-    
-}
+fn main() {}

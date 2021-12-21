@@ -28,9 +28,18 @@ RUST_BACKTRACE=1 cargo run
 
 ## Notes
 
+* compiles to LLVM IR
 * guarantees memory safety
+* no GC.  compiler generates code at compile time to clean up of memory for variable that go out of scope, etc.  no overhead at runtime for this.  this is what makes it performant. *zero-cost abstractions*
+* excellent compiler messages
+  * *if you managed to appease the compiler, there’s a good chance your code will work–barring any logic flaws*
+* out-of-bounds access at runtime causes the program to immediately stop
+* ownership rules apply across multiple threads
+* either one mutable reference (read/write) OR many immutable (read-only) references
+* no `Null`, only `Option`
 * traits are like interfaces in other languages
 * includes macros for metaprogramming
+* can call C code via `extern`
 
 ---
 
@@ -68,3 +77,4 @@ enum Result<T, E> { // T and E are generics. T can contain any type of value, E 
 * [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
 * [rust-analyzer](https://rust-analyzer.github.io/) - *Bringing a great IDE experience to the Rust programming language.*
 * [GitHub - watchexec/cargo-watch: Watches over your Cargo project&#39;s source.](https://github.com/watchexec/cargo-watch)
+* [Rust: A Language for the Next 40 Years - Carol Nichols](https://www.youtube.com/watch?v=A3AdN7U24iU)

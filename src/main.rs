@@ -2,10 +2,12 @@
 #![allow(unused_variables)]
 #![allow(warnings, unused)]
 
+use std::env;
 use std::io;
 use std::char;
 use std::str::FromStr;
 use std::process::Command;
+use std::fs;
 
 #[test]
 fn test_hello_format() {
@@ -21,6 +23,25 @@ fn for_loop() {
         s.push_str(i.to_string().as_str())
     }
     assert_eq!("012", s.as_str())
+}
+
+#[test]
+fn test_read_file() {
+    let filename = "./README.md";
+    let contents = fs::read_to_string(filename)
+    .expect("Something went wrong reading the file");
+    assert!(contents.contains("rust-playground"));
+}
+
+#[test]
+fn test_read_dir() {
+    let mut files = Vec::new();
+    let paths = fs::read_dir("./").unwrap();
+
+    for path in paths {
+        files.push(format!("{}", path.unwrap().path().display()))
+    }
+    assert!(files.len() > 0)
 }
 
 fn user_input() {
@@ -158,6 +179,11 @@ fn test_traits() {
         
 }
 
+#[test]
+fn test_command_line_args() {
+    let args: Vec<String> = env::args().collect();
+    println!("{:?}", args);
+}
 
 fn main() {
     

@@ -2,15 +2,15 @@
 #![allow(unused_variables)]
 #![allow(warnings, unused)]
 
-use rand::Rng;
 use std::io;
 use std::char;
 use std::str::FromStr;
 use std::process::Command;
 
+#[test]
 fn hello() {
     let name = "brian";
-    println!("Hello {}!", name);
+    assert_eq!(format!("Hello {}!", name), "Hello brian!");
 }
 
 #[test]
@@ -32,17 +32,6 @@ fn user_input() {
         Err(e) => println!("Failed to read line: {}", e),
     }
 }
-
-fn generate_random_number() {
-    let num: i32 = rand::thread_rng().gen();
-    println!("random number: {}", num);
-
-    let low = 0;
-    let high = 9;
-    let ranged_num = rand::thread_rng().gen_range(low, high);
-    println!("ranged random number ({}-{}): {}", low, high, ranged_num);
-}
-
 
 #[derive(Debug)]
 struct Person<'a> {
@@ -96,7 +85,6 @@ fn test_todo() {
 }
 
 #[test]
-#[ignore]
 fn ignored_test() {
     assert_eq!(0, 0);
 }
@@ -117,15 +105,24 @@ fn test_child_process() {
         let s = String::from_utf8_lossy(&output.stderr);
         panic!("echo failed and stderr was:\n{}", s);
     }
-
-    
 }
+
+#[test]
+fn test_variables() {
+    let x = 42;
+    let y = 43;
+    let var1 = &x;
+    let mut var2 = &x;
+    var2 = &y;
+}
+
+
 
 fn main() {
     // hello();
     // for_loop();
     // user_input();
     // generate_random_number();
-    struct_example();
+    //struct_example();
     
 }

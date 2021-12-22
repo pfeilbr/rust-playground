@@ -40,6 +40,7 @@ RUST_BACKTRACE=1 cargo run
 * traits are like interfaces in other languages
 * includes macros for metaprogramming
 * can call C code via `extern`
+* rust lifetimes are not in other languages. essentially tells the compiler when it can generate code to free memory/variables.  the responsibility the GC takes on is shifted to you to take care of and think of.  see [Understanding lifetimes in Rust - LogRocket Blog](https://blog.logrocket.com/understanding-lifetimes-in-rust/) for details.
 
 ---
 
@@ -79,3 +80,4 @@ enum Result<T, E> { // T and E are generics. T can contain any type of value, E 
 * [GitHub - watchexec/cargo-watch: Watches over your Cargo project&#39;s source.](https://github.com/watchexec/cargo-watch)
 * [Rust: A Language for the Next 40 Years - Carol Nichols](https://www.youtube.com/watch?v=A3AdN7U24iU)
 * [A collection of notable Rust blog posts](https://gist.github.com/brson/a324c83a6af6a8a78dfaa9d33eb9b48e)
+* [Understanding lifetimes in Rust - LogRocket Blog](https://blog.logrocket.com/understanding-lifetimes-in-rust/)

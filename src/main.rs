@@ -190,7 +190,7 @@ fn test_current_exe() {
 #[test]
 fn test_json() {
     use serde::{Deserialize, Serialize};
-    use serde_json::{Result, Value};
+    use serde_json::{Result, Value, json};
 
     #[derive(Serialize, Deserialize)]
     struct Person {
@@ -216,7 +216,32 @@ fn test_json() {
 
         let p: Person = serde_json::from_str(data).unwrap();
         assert_eq!(p.name, "John Doe");
-        assert_eq!(p.age, 43)
+        assert_eq!(p.age, 43);
+
+
+        let john = json!({
+            "name": "John Doe",
+            "age": 43,
+            "phones": [
+                "+44 1234567",
+                "+44 2345678"
+            ]
+        });
+        assert_eq!(john["name"], "John Doe");
+        assert_eq!(john["age"], 43);
+
+        #[derive(Serialize, Deserialize)]
+        struct Address {
+            street: String,
+            city: String,
+        }
+        let address = Address {
+            street: "10 Downing Street".to_owned(),
+            city: "London".to_owned(),
+        };
+        let j = serde_json::to_string(&address).unwrap();
+        assert_eq!(j, "{\"street\":\"10 Downing Street\",\"city\":\"London\"}")
+
 }
 
 fn main() {}

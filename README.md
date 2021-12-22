@@ -40,7 +40,7 @@ RUST_BACKTRACE=1 cargo run
 * traits are like interfaces in other languages
 * includes macros for metaprogramming
 * can call C code via `extern`
-* rust lifetimes are not in other languages. essentially tells the compiler when it can generate code to free memory/variables.  the responsibility the GC takes on is shifted to you to take care of and think of.  see [Understanding lifetimes in Rust - LogRocket Blog](https://blog.logrocket.com/understanding-lifetimes-in-rust/) for details.
+* rust lifetimes are not in other languages. essentially tells the compiler when it can generate code to free memory/variables.  the responsibility the runtime GC in other languages is shifted to you to take care of and think of (*zero cost abstraction? not so much*).  see [Understanding lifetimes in Rust - LogRocket Blog](https://blog.logrocket.com/understanding-lifetimes-in-rust/) for details.
 
 ---
 

@@ -181,4 +181,42 @@ fn test_command_line_args() {
     println!("{:?}", args);
 }
 
+#[test]
+fn test_current_exe() {
+    let exe = env::current_exe().expect("current_exe() failed");
+    println!("{:?}", exe)
+}
+
+#[test]
+fn test_json() {
+    use serde::{Deserialize, Serialize};
+    use serde_json::{Result, Value};
+
+    #[derive(Serialize, Deserialize)]
+    struct Person {
+        name: String,
+        age: u8,
+        phones: Vec<String>,
+    }    
+
+    let data = r#"
+        {
+            "name": "John Doe",
+            "age": 43,
+            "phones": [
+                "+44 1234567",
+                "+44 2345678"
+            ]
+        }"#;
+
+        let v: Value = serde_json::from_str(data).unwrap();
+        assert_eq!(v["name"], "John Doe");
+        assert_eq!(v["age"], 43);
+
+
+        let p: Person = serde_json::from_str(data).unwrap();
+        assert_eq!(p.name, "John Doe");
+        assert_eq!(p.age, 43)
+}
+
 fn main() {}

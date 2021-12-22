@@ -78,3 +78,4 @@ enum Result<T, E> { // T and E are generics. T can contain any type of value, E 
 * [rust-analyzer](https://rust-analyzer.github.io/) - *Bringing a great IDE experience to the Rust programming language.*
 * [GitHub - watchexec/cargo-watch: Watches over your Cargo project&#39;s source.](https://github.com/watchexec/cargo-watch)
 * [Rust: A Language for the Next 40 Years - Carol Nichols](https://www.youtube.com/watch?v=A3AdN7U24iU)
+* [A collection of notable Rust blog posts](https://gist.github.com/brson/a324c83a6af6a8a78dfaa9d33eb9b48e)

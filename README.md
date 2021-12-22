@@ -39,9 +39,12 @@ RUST_BACKTRACE=1 cargo run
 * no `Null`, only `Option`
 * traits are like interfaces in other languages
 * includes macros for metaprogramming
+  * [dtolnay/cargo-expand: Subcommand to show result of macro expansion](https://github.com/dtolnay/cargo-expand)
+* concurrency support via threads, channels, mutex
 * can call C code via `extern`
 * *Lifetimes are, in some ways, Rust’s most distinctive feature*
   * rust lifetimes are not in other languages. essentially tells the compiler when it can generate code to free memory/variables.  the responsibility the runtime GC in other languages is shifted to you to take care of and think of (*zero cost abstraction? not so much ... there is the human cost*).  see [Understanding lifetimes in Rust - LogRocket Blog](https://blog.logrocket.com/understanding-lifetimes-in-rust/) for details.
+* cargo workspaces
 
 ---
 
@@ -77,8 +80,12 @@ enum Result<T, E> { // T and E are generics. T can contain any type of value, E 
 
 * [The Rust Programming Language book](https://doc.rust-lang.org/stable/book/)
 * [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
+* [Table of Contents - Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/intro.html)
 * [rust-analyzer](https://rust-analyzer.github.io/) - *Bringing a great IDE experience to the Rust programming language.*
 * [GitHub - watchexec/cargo-watch: Watches over your Cargo project&#39;s source.](https://github.com/watchexec/cargo-watch)
 * [Rust: A Language for the Next 40 Years - Carol Nichols](https://www.youtube.com/watch?v=A3AdN7U24iU)
 * [A collection of notable Rust blog posts](https://gist.github.com/brson/a324c83a6af6a8a78dfaa9d33eb9b48e)
 * [Understanding lifetimes in Rust - LogRocket Blog](https://blog.logrocket.com/understanding-lifetimes-in-rust/)
+* [The Little Book of Rust Macros](http://danielkeep.github.io/tlborm/book/)
+* [Yoututbe | Jon Gjengset](https://www.youtube.com/channel/UC_iD0xppBwwsrM9DegC5cQQ) - rust videos
+* [dtolnay/cargo-expand: Subcommand to show result of macro expansion](https://github.com/dtolnay/cargo-expand)

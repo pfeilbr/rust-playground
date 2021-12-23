@@ -14,7 +14,7 @@ use std::str::FromStr;
 fn test_hello_format() {
     print!("hello");
     let name = "brian";
-    assert_eq!(format!("Hello {}!", name), "Hello brian!");
+    assert_eq!(format!("Hello {}", name), "Hello brian");
 }
 
 #[test]

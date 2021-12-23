@@ -111,8 +111,10 @@ fn test_todo() {
 }
 
 #[test]
+#[ignore]
 fn ignored_test() {
-    assert_eq!(0, 0);
+    let a = 0;
+    assert_eq!(a, 0);
 }
 
 #[test]

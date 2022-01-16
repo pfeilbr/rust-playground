@@ -19,7 +19,7 @@ fn test_hello_format() {
 
 #[test]
 fn test_mem_size() {
-    let x = 5;
+    let x = 6;
     assert_eq!(4, std::mem::size_of_val(&x))
 }
 

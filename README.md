@@ -1,6 +1,8 @@
 # rust-playground
 
+
 learn [Rust](https://www.rust-lang.org/) programming language
+
 
 ## Prerequisites
 

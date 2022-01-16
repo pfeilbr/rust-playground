@@ -13,8 +13,8 @@ use std::str::FromStr;
 #[test]
 fn test_hello_format() {
     print!("hello");
-    let name = "brian";
-    assert_eq!(format!("Hello {}", name), "Hello brian");
+    let name = "brian!";
+    assert_eq!(format!("Hello {}", name), "Hello brian!");
 }
 
 #[test]

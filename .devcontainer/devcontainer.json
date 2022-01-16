@@ -32,6 +32,10 @@
 		"tamasfe.even-better-toml",
 		"serayuzgur.crates"
 	],
+	"features": {
+		"github-cli": "latest",
+		"homebrew": "latest"
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

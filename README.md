@@ -54,7 +54,6 @@ see [Option and Result | Learning Rust](https://learning-rust.github.io/docs/e3.
 
 ### `Option`
 
-
 ```rust
 // An output can have either Some value or no value/ None.
 enum Option<T> { // T is a generic and it can contain any type of value.

@@ -83,9 +83,9 @@ enum Result<T, E> { // T and E are generics. T can contain any type of value, E 
 
 ## Box, Rc, Arc, Cell
 
-- Box<T> is for single ownership (single thread).
-- Rc<T> is for multiple ownership (single thread).
-- Arc<T> is for multiple ownership, but threadsafe (multi-thread).
+- Box<T> is for single ownership (single thread, stored on heap).
+- Rc<T> is for multiple ownership (single thread, stored on heap).
+- Arc<T> is for multiple ownership, but threadsafe (multi-thread, stored on heap).
 - Cell<T> is for "interior mutability" for Copy types; that is, when you need to mutate something behind a &T.
 
 ---

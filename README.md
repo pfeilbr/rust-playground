@@ -81,7 +81,7 @@ enum Result<T, E> { // T and E are generics. T can contain any type of value, E 
 
 ---
 
-## Box, Rc, Arc, Cell
+## Smart Pointers (Box, Rc, Arc, Cell)
 
 - Box<T> is for single ownership (single thread, stored on heap).
 - Rc<T> is for multiple ownership (single thread, stored on heap).

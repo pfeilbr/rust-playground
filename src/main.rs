@@ -221,6 +221,8 @@ fn test_json() {
     let v: Value = serde_json::from_str(data).unwrap();
     assert_eq!(v["name"], "John Doe");
     assert_eq!(v["age"], 43);
+    assert_eq!(v["phones"][0], "+44 1234567");
+    assert_eq!(v["phones"][1], "+44 2345678");
 
     let p: Person = serde_json::from_str(data).unwrap();
     assert_eq!(p.name, "John Doe");
@@ -249,5 +251,38 @@ fn test_json() {
     let j = serde_json::to_string(&address).unwrap();
     assert_eq!(j, "{\"street\":\"10 Downing Street\",\"city\":\"London\"}")
 }
+
+#[test]
+fn test_dir_listing_for_src_main() {
+    use std::path::Path;
+    let mut files = Vec::new();
+    let dir = Path::new("./src");
+
+    let entries = match fs::read_dir(dir) {
+        Ok(entries) => entries,
+        Err(_) => {
+            panic!("Could not read directory");
+        }
+    };
+
+    for entry_result in entries {
+        // Handle the Result for each entry
+        match entry_result {
+            Ok(entry) => {
+                let path = entry.path();
+                if path.is_file() {
+                    files.push(path.to_string_lossy().into_owned());
+                }
+            }
+            Err(_) => {
+                // Handle the error here if needed
+            }
+        }
+    }
+
+    assert_eq!(files[0], "./src/main.rs")
+    
+}
+
 
 fn main() {}

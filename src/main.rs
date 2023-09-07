@@ -3,6 +3,7 @@
 #![allow(warnings, unused)]
 
 use std::char;
+use std::collections::HashMap;
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -155,6 +156,18 @@ fn test_tuples() {
     let rect1 = (30, 50);
     assert_eq!(30, rect1.0);
     assert_eq!(50, rect1.1)
+}
+
+#[test]
+fn test_hash_maps() {
+    let mut person = HashMap::new();
+    person.insert("first", "john");
+    person.insert("last", "doe");
+
+    assert_eq!(2, person.len());
+
+    assert_eq!(person.get("first").unwrap(), &"john");
+    assert_eq!(person.get("last").unwrap(), &"doe");
 }
 
 #[test]

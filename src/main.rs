@@ -84,7 +84,10 @@ fn test_struct() {
 fn test_strings() {
     let s = String::from_str("foo").unwrap();
     let ss = &s;
-    assert_eq!(ss, "foo")
+    assert_eq!(ss, "foo");
+
+    let s2 = String::from("bar");
+    assert_eq!(s2, "bar");
 }
 
 #[test]
@@ -292,7 +295,7 @@ fn test_dir_listing_for_src_main() {
 }
 
 #[test]
-fn test_create_and_read_sample_csv() -> Result<(), Error> {
+fn test_create_and_read_sample_csv() -> core::result::Result<(), Error> {
 
     #[derive(Debug, Deserialize)]
     struct Record {
@@ -344,5 +347,70 @@ fn test_create_and_read_sample_csv() -> Result<(), Error> {
 
     Ok(())
 }
+
+use std::io::{Read, Write, Result};
+use std::net::{TcpListener, TcpStream, SocketAddr};
+use std::thread;
+use std::time::Duration;
+
+#[test]
+fn test_tcp_server_and_client() {
+    fn handle_client(mut stream: TcpStream) {
+        let mut buffer = [0; 512];
+
+        loop {
+            let nbytes = stream.read(&mut buffer).unwrap();
+
+            // If we receive 0 bytes, the client has closed the connection
+            if nbytes == 0 {
+                break;
+            }
+
+            // Echo the data back to the client
+            stream.write(&buffer[..nbytes]).unwrap();
+        }
+    }
+
+    fn start_server(addr: SocketAddr) -> Result<()> {
+        let listener = TcpListener::bind(addr)?;
+        for stream in listener.incoming() {
+            match stream {
+                Ok(stream) => {
+                    thread::spawn(|| {
+                        handle_client(stream);
+                    });
+                }
+                Err(e) => {
+                    eprintln!("Connection failed: {}", e);
+                }
+            }
+        }
+        Ok(())
+    }
+
+    // Start the server in a separate thread
+    let server_thread = thread::spawn(|| {
+        start_server("127.0.0.1:8888".parse().unwrap());
+    });
+
+    // Give the server some time to start up
+    thread::sleep(Duration::from_secs(1));
+
+    // Client code
+    let mut stream = TcpStream::connect("127.0.0.1:8888").unwrap();
+    let msg = b"Hello, server!";
+    stream.write_all(msg).unwrap();
+
+    let mut buffer = [0; 512];
+    stream.read_exact(&mut buffer).unwrap();
+
+    // Check the response from the server
+    assert_eq!(&buffer[..msg.len()], msg);
+
+    // Give some time for the server to process and then stop it
+    thread::sleep(Duration::from_secs(1));
+    drop(server_thread);
+}
+
 
 fn main() {}

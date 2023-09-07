@@ -5,7 +5,9 @@
 use std::char;
 use std::env;
 use std::fs;
+use std::path::{Path, PathBuf};
 use std::io;
+use std::io::Error;
 use std::mem;
 use std::process::Command;
 use std::str::FromStr;
@@ -192,12 +194,16 @@ fn test_command_line_args() {
 
 #[test]
 fn test_current_exe() {
+    // exe is something like "/workspaces/rust-playground/target/debug/deps/rust_playground-0668dbea08391dc4"
     let exe = env::current_exe().expect("current_exe() failed");
+    let path_str = exe.to_string_lossy().to_string();
+    let file_name_substring = "rust_playground";
+    assert!(path_str.contains(file_name_substring), "Path does not contain the expected substring");
     println!("{:?}", exe)
 }
 
 #[test]
-fn test_json() {
+fn test_json_serialization() {
     use serde::{Deserialize, Serialize};
     use serde_json::{json, Result, Value};
 
@@ -254,7 +260,6 @@ fn test_json() {
 
 #[test]
 fn test_dir_listing_for_src_main() {
-    use std::path::Path;
     let mut files = Vec::new();
     let dir = Path::new("./src");
 
@@ -284,5 +289,33 @@ fn test_dir_listing_for_src_main() {
     
 }
 
+#[test]
+fn test_csv() -> Result<(), Error> {
+    let mut tmp_dir = PathBuf::from("./tmp");
+
+    if !tmp_dir.exists() {
+        fs::create_dir(&tmp_dir)?;
+    }
+
+    // Create a sample CSV file inside the temporary directory
+    let mut file_path = tmp_dir.clone();
+    file_path.push("sample.csv");
+    let mut wtr = csv::Writer::from_path(&file_path)?;
+
+    // Write the headers
+    wtr.write_record(&["name", "age", "date_of_birth"])?;
+
+    // Write sample data
+    wtr.write_record(&["Alice", "30", "1991-02-01"])?;
+    wtr.write_record(&["Bob", "40", "1981-03-15"])?;
+    wtr.write_record(&["Charlie", "25", "1996-07-21"])?;
+
+    wtr.flush()?;
+
+    // Verify that the file has been created
+    assert!(file_path.exists(), "CSV file should exist");
+
+    Ok(())
+}
 
 fn main() {}

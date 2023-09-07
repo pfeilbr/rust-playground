@@ -11,6 +11,8 @@ use std::io::Error;
 use std::mem;
 use std::process::Command;
 use std::str::FromStr;
+use chrono::NaiveDate;
+use serde::Deserialize;
 
 #[test]
 fn test_hello_format() {
@@ -290,9 +292,19 @@ fn test_dir_listing_for_src_main() {
 }
 
 #[test]
-fn test_csv() -> Result<(), Error> {
-    let mut tmp_dir = PathBuf::from("./tmp");
+fn test_create_and_read_sample_csv() -> Result<(), Error> {
 
+    #[derive(Debug, Deserialize)]
+    struct Record {
+        name: String,
+        age: u8,
+        date_of_birth: NaiveDate,
+    }
+
+
+    // Create a temporary directory for the test
+    let mut tmp_dir = std::env::temp_dir();
+    tmp_dir.push("rust_csv_test");
     if !tmp_dir.exists() {
         fs::create_dir(&tmp_dir)?;
     }
@@ -314,6 +326,21 @@ fn test_csv() -> Result<(), Error> {
 
     // Verify that the file has been created
     assert!(file_path.exists(), "CSV file should exist");
+
+    // Read the CSV into a Vec of Record structs
+    let mut rdr = csv::Reader::from_path(&file_path)?;
+    let mut records: Vec<Record> = Vec::new();
+
+    for result in rdr.deserialize() {
+        let record: Record = result?;
+        records.push(record);
+    }
+
+    // Verify that the records are correct (replace with your actual test logic)
+    assert_eq!(records.len(), 3, "Should have read 3 records");
+    assert_eq!(records[0].name, "Alice");
+    assert_eq!(records[0].age, 30);
+    assert_eq!(records[0].date_of_birth, NaiveDate::from_ymd(1991, 2, 1));
 
     Ok(())
 }
